@@ -2,84 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="widtl=device-widtl, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planning poker</title>
-    <style>
-      body {
-        font-family: system-ui;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      .card {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-      }
-
-      .points-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin: 20px 0;
-      }
-
-      .point-button {
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background: white;
-        cursor: pointer;
-      }
-
-      .point-button:hover {
-        background: #f0f0f0;
-      }
-
-      .point-button.selected {
-        background: #007bff;
-        color: white;
-      }
-
-      button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background: #0056b3;
-      }
-
-      input[type="text"] {
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 10px;
-      }
-
-      #results {
-        margin-top: 20px;
-      }
-
-      canvas {
-        max-width: 400px;
-        margin: 20px auto;
-        display: block;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   </head>
   <body>
     <div id="setup-screen" class="card">
@@ -95,60 +21,30 @@
         <input type="checkbox" id="anonymous" />
         <label for="anonymous">Join anonymously</label>
       </div>
-      <button onclick="joinGame()">Join</button>
+      <button
+        onclick="joinGame(document.getElementById('player-name').value, document.getElementById('anonymous').checked)"
+      >
+        Join
+      </button>
     </div>
 
     <div id="game-screen" class="card hidden">
       <h2>Planning Poker</h2>
       <div class="points-grid">
-        <button class="point-button" onclick="selectPoints(1)">1</button>
-        <button class="point-button" onclick="selectPoints(2)">2</button>
-        <button class="point-button" onclick="selectPoints(3)">3</button>
-        <button class="point-button" onclick="selectPoints(5)">5</button>
-        <button class="point-button" onclick="selectPoints(8)">8</button>
-        <button class="point-button" onclick="selectPoints(13)">13</button>
-        <button class="point-button" onclick="selectPoints(21)">21</button>
-        <button class="point-button" onclick="selectPoints(34)">34</button>
+        <button class="point-button" onclick="selectPoints(1, event)">1</button>
+        <button class="point-button" onclick="selectPoints(2, event)">2</button>
+        <button class="point-button" onclick="selectPoints(3, event)">3</button>
+        <button class="point-button" onclick="selectPoints(5, event)">5</button>
+        <button class="point-button" onclick="selectPoints(8, event)">8</button>
       </div>
       <button onclick="submitVote()">Submit Vote</button>
-      <button onclick="clearVotes()">Clear All Votes</button>
-      <div id="results">
-        <canvas id="chart"></canvas>
-      </div>
     </div>
 
-    <script>
-      function createGame() {
-        document.getElementById("setup-screen").classList.add("hidden");
-        document.getElementById("join-screen").classList.remove("hidden");
-      }
+    <div id="results" class="card hidden">
+      <div id="voting-results">results</div>
+      <button onclick="clearVotes()">Clear All Votes</button>
+    </div>
 
-      function joinGame() {
-        document.getElementById("join-screen").classList.add("hidden");
-        document.getElementById("game-screen").classList.remove("hidden");
-      }
-
-      let selectedPoints = null;
-
-      function selectPoints(points) {
-        selectedPoints = points;
-        document.querySelectorAll(".point-button").forEach((btn) => {
-          btn.classList.remove("selected");
-        });
-        event.target.classList.add("selected");
-      }
-
-      function submitVote() {
-        if (selectedPoints === null) return;
-      }
-
-      function clearVotes() {
-        selectedPoints = null;
-        document.querySelectorAll(".point-button").forEach((btn) => {
-          btn.classList.remove("selected");
-        });
-      }
-    </script>
-    <script src="./app.js" type="module"></script>
+    <script src="app.js" type="module"></script>
   </body>
 </html>

@@ -1,0 +1,75 @@
+body {
+  font-family: system-ui;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.points-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.point-button {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  color: black;
+}
+
+.point-button:hover {
+  background: #f0f0f0;
+}
+
+.point-button.selected {
+  background: #007bff;
+  color: white;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+canvas {
+  max-width: 400px;
+  margin: 20px auto;
+  display: block;
+}
